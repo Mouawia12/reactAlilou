@@ -1,0 +1,140 @@
+.dashboard-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.dashboard-hero {
+    padding: 2rem;
+    border-radius: 1.5rem;
+    background: linear-gradient(135deg, rgba(31, 60, 136, 0.12), rgba(51, 181, 229, 0.25));
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.dashboard-title {
+    font-size: clamp(1.6rem, 3vw, 2.4rem);
+    color: #0f172a;
+    margin-bottom: 0.5rem;
+    font-weight: 700;
+}
+
+.dashboard-subtitle {
+    margin: 0;
+    color: rgba(15, 23, 42, 0.65);
+    font-size: 1rem;
+}
+
+.dashboard-filters {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+.filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.filter-label {
+    font-weight: 600;
+    color: #1f2937;
+}
+
+.dashboard-dropdown {
+    width: 100%;
+}
+
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.5rem;
+}
+
+.dashboard-card {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.5rem;
+    border-radius: 1.25rem;
+    text-decoration: none;
+    background: #fff;
+    box-shadow: 0 15px 30px rgba(15, 23, 42, 0.08);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.dashboard-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 25px 40px rgba(15, 23, 42, 0.12);
+}
+
+.dashboard-card .card-icon {
+    font-size: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 56px;
+    height: 56px;
+    border-radius: 18px;
+    color: #fff;
+}
+
+.dashboard-card .card-content {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+}
+
+.dashboard-card .card-title {
+    color: #475569;
+    font-size: 0.95rem;
+    font-weight: 600;
+}
+
+.dashboard-card .card-value {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #0f172a;
+}
+
+.dashboard-card.success .card-icon {
+    background: linear-gradient(135deg, #22c55e, #16a34a);
+}
+
+.dashboard-card.danger .card-icon {
+    background: linear-gradient(135deg, #ef4444, #b91c1c);
+}
+
+.dashboard-card.info .card-icon {
+    background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+}
+
+.dashboard-card.warning .card-icon {
+    background: linear-gradient(135deg, #f59e0b, #d97706);
+}
+
+html[dir="rtl"] .dashboard-grid {
+    direction: rtl;
+}
+
+html[dir="rtl"] .dashboard-card {
+    flex-direction: row-reverse;
+}
+
+@media (max-width: 575.98px) {
+    .dashboard-hero {
+        padding: 1.5rem;
+        text-align: center;
+    }
+
+    .dashboard-card {
+        padding: 1.2rem;
+    }
+
+    .dashboard-card .card-value {
+        font-size: 1.2rem;
+    }
+}

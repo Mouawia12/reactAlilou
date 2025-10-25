@@ -1,9 +1,9 @@
 
-.sidebar-container {
+.sidebar-wrapper {
   display: flex;
   flex-direction: column;
   height: 100vh;
-  background-color: #001529; /* Antd dark theme background */
+  background: linear-gradient(180deg, #0f172a 0%, #1f2937 60%, #111827 100%);
 }
 
 .sidebar-profile {
@@ -24,11 +24,23 @@
   color: #ffffffd9;
   margin: 0;
   font-weight: 600;
+  font-size: 1rem;
 }
 
 .sidebar-menu {
   flex: 1;
   overflow-y: auto;
+}
+
+.sidebar-menu .ant-menu-item,
+.sidebar-menu .ant-menu-submenu-title {
+  border-radius: 12px;
+  margin-inline: 12px !important;
+  margin-bottom: 4px !important;
+}
+
+.sidebar-menu .ant-menu-item-selected {
+  background: linear-gradient(135deg, rgba(51, 181, 229, 0.25), rgba(31, 60, 136, 0.35)) !important;
 }
 
 /* Custom scrollbar for webkit browsers */
@@ -49,6 +61,15 @@
   padding: 16px;
   text-align: center;
   border-top: 1px solid #ffffff1a;
+}
+
+html[dir="rtl"] .sidebar-profile {
+  direction: rtl;
+}
+
+html[dir="rtl"] .sidebar-menu .ant-menu-submenu-title .ant-menu-title-content,
+html[dir="rtl"] .sidebar-menu .ant-menu-item .ant-menu-title-content {
+  text-align: right;
 }
 
 

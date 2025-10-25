@@ -19,7 +19,7 @@ export function MyAlert(message, icon, title) {
     });
 }
 
-export function confirmLogout(navigate: any) {
+export function confirmLogout(navigate) {
     Swal.fire({
         title: "Are you sure?",
         text: "You will be logged out from your session!",
@@ -59,11 +59,11 @@ export function confirmLogout(navigate: any) {
     });
 }
 
-export const isAuthenticated = (): boolean => {
+export const isAuthenticated = () => {
     const token = sessionStorage.getItem("token");
     if (!token) return false;
     try {
-        const decoded: any = jwtDecode(token);
+        const decoded = jwtDecode(token);
         const now = Date.now() / 1000;
 
         if (decoded.exp && decoded.exp > now) {

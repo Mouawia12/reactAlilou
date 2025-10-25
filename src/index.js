@@ -17,17 +17,20 @@ import Login from "./auth/Login";
 import Register from "./auth/Register";
 import MasterLayout from "./pages/MasterLayout";
 import ProtectedRoute from "./helper/ProtectedRoute";
+import { LanguageProvider } from "./context/LanguageContext";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-    <BrowserRouter>
-        <Routes>
-            <Route path="/" element={<Login/>}/>
-            <Route path="/login" element={<ProtectedRoute><Login/></ProtectedRoute>}/>
-            <Route path="/register" element={<ProtectedRoute><Register/></ProtectedRoute>}/>
-            <Route path="/*" element={<ProtectedRoute><MasterLayout /></ProtectedRoute>} />
-        </Routes>
-    </BrowserRouter>
+    <LanguageProvider>
+        <BrowserRouter>
+            <Routes>
+                <Route path="/" element={<Login/>}/>
+                <Route path="/login" element={<Login/>}/>
+                <Route path="/register" element={<Register/>}/>
+                <Route path="/*" element={<ProtectedRoute><MasterLayout /></ProtectedRoute>} />
+            </Routes>
+        </BrowserRouter>
+    </LanguageProvider>
 );
 
 // If you want to start measuring performance in your app, pass a function
