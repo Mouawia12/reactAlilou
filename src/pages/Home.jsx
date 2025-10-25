@@ -1,20 +1,20 @@
-import React, { useEffect, useState } from "react";
-import { apiFetch } from "../auth/api";
-import { MyAlert, MyLoading, MyLoadingClose, NumberFormat } from "../helper/Tools";
-import { Card } from "primereact/card";
-import { FaCoins } from "react-icons/fa";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { Dropdown } from "primereact/dropdown";
+import { FaCoins, FaClipboardList, FaFileInvoiceDollar, FaTasks, FaUsers } from "react-icons/fa";
+import { apiFetch } from "../auth/api";
+import { MyAlert, MyLoading, MyLoadingClose, NumberFormat } from "../helper/Tools";
+import { useLanguage } from "../context/LanguageContext";
 
 const Home = () => {
-    const [dashboard, setDashboard] = useState([]);
+    const { t } = useLanguage();
+    const [dashboard, setDashboard] = useState({});
     const [periodes, setPeriodes] = useState([]);
     const [enterprise, setEnterprise] = useState([]);
     const [periodeFilter, setPeriodeFilter] = useState(null);
     const [enterpriseFilter, setEnterpriseFilter] = useState(null);
 
-    // ✅ Load periodes & enterprises
-    const fetchData = async () => {
+    const fetchData = useCallback(async () => {
         try {
             MyLoading("Loading ...");
             const [periodesRes, enterpriseRes] = await Promise.all([
@@ -32,25 +32,19 @@ const Home = () => {
             setPeriodes(periodesData);
             setEnterprise(enterpriseData);
 
-            // ✅ Automatically select active periode
-            const activePeriode = periodesData.find(p => p.active) || periodesData[periodesData.length - 1];
+            const activePeriode = periodesData.find((p) => p.active) || periodesData[periodesData.length - 1];
             if (activePeriode) setPeriodeFilter(activePeriode.id);
-
         } catch (err) {
-            MyAlert("Error fetching data: " + err.message, "error", "Error");
+            MyAlert(`${t("common.status.error")}: ${err.message}`, "error", t("common.status.error"));
         } finally {
             MyLoadingClose();
         }
-    };
+    }, [t]);
 
-    // ✅ Fetch dashboard stats dynamically
-    const fetchdash = async (periodeId, enterpriseId) => {
+    const fetchDashboard = useCallback(async (periodeId, enterpriseId) => {
         try {
-
-
-            const safePeriodeId = periodeId && typeof periodeId === "object" ? periodeId.value : periodeId;
-            const safeEnterpriseId = enterpriseId && typeof enterpriseId === "object" ? enterpriseId.value : enterpriseId;
-
+            const safePeriodeId = typeof periodeId === "object" ? periodeId?.value : periodeId;
+            const safeEnterpriseId = typeof enterpriseId === "object" ? enterpriseId?.value : enterpriseId;
 
             const params = new URLSearchParams();
             if (safePeriodeId) params.append("periodeId", safePeriodeId);
@@ -66,149 +60,147 @@ const Home = () => {
 
             const dashboardData = await dashboardRes.json();
             setDashboard(dashboardData);
-
         } catch (err) {
-            MyAlert("Error fetching data: " + err.message, "error", "Error");
-        } 
-    };
+            MyAlert(`${t("common.status.error")}: ${err.message}`, "error", t("common.status.error"));
+        }
+    }, [t]);
 
-    // ✅ Run initial load
     useEffect(() => {
         fetchData();
-    }, []);
+    }, [fetchData]);
 
-    // ✅ Refetch when filters change
     useEffect(() => {
         if (periodeFilter !== null || enterpriseFilter !== null) {
-            fetchdash(periodeFilter, enterpriseFilter);
+            fetchDashboard(periodeFilter, enterpriseFilter);
         }
-    }, [periodeFilter, enterpriseFilter]);
+    }, [periodeFilter, enterpriseFilter, fetchDashboard]);
 
-    const stats = [
-        {
-            title: "Sum Facture Payed (DZD)",
-            value: NumberFormat(dashboard.sumPayed),
-            color: "#3f8600",
-            icon: <FaCoins />,
-        },
-        {
-            title: "N° Facture Payed",
-            value: dashboard.countPayed,
-            color: "#3f8600",
-            icon: "",
-        },
-        {
-            title: "Sum Facture Not Payed (DZD)",
-            value: NumberFormat(dashboard.sumNotPayed),
-            color: "#cf1322",
-            icon: <FaCoins />,
-        },
-        {
-            title: "N° Facture Not Payed",
-            value: dashboard.countNotPayed,
-            color: "#cf1322",
-            icon: "",
-        },
-        {
-            title: "N° Client",
-            value: dashboard.nbrClient,
-            color: "#cf1322",
-            icon: "",
-        },
-        {
-            title: "N° Bon de Commandes",
-            value: dashboard.nbrOrder,
-            color: "#cf1322",
-            icon: "",
-        },
-        {
-            title: "N° Work Periodics",
-            value: dashboard.nbrWorkPeriodic,
-            color: "#cf1322",
-            icon: "",
-        },
-        {
-            title: "N° Missions",
-            value: dashboard.nbrMission,
-            color: "#cf1322",
-            icon: "",
-        },
-    ];
+    const numberFormatter = useMemo(() => new Intl.NumberFormat("fr-FR"), []);
+
+    const cards = useMemo(
+        () => [
+            {
+                key: "sumPayed",
+                title: t("dashboard.cards.sumPayed"),
+                value: NumberFormat(dashboard.sumPayed || 0),
+                tone: "success",
+                icon: <FaFileInvoiceDollar />,
+                link: "/factures",
+            },
+            {
+                key: "countPayed",
+                title: t("dashboard.cards.countPayed"),
+                value: numberFormatter.format(dashboard.countPayed || 0),
+                tone: "success",
+                icon: <FaCoins />,
+                link: "/factures",
+            },
+            {
+                key: "sumNotPayed",
+                title: t("dashboard.cards.sumNotPayed"),
+                value: NumberFormat(dashboard.sumNotPayed || 0),
+                tone: "danger",
+                icon: <FaFileInvoiceDollar />,
+                link: "/factures",
+            },
+            {
+                key: "countNotPayed",
+                title: t("dashboard.cards.countNotPayed"),
+                value: numberFormatter.format(dashboard.countNotPayed || 0),
+                tone: "danger",
+                icon: <FaClipboardList />,
+                link: "/factures",
+            },
+            {
+                key: "nbrClient",
+                title: t("dashboard.cards.nbrClient"),
+                value: numberFormatter.format(dashboard.nbrClient || 0),
+                tone: "info",
+                icon: <FaUsers />,
+                link: "/clients",
+            },
+            {
+                key: "nbrOrder",
+                title: t("dashboard.cards.nbrOrder"),
+                value: numberFormatter.format(dashboard.nbrOrder || 0),
+                tone: "warning",
+                icon: <FaClipboardList />,
+                link: "/orders",
+            },
+            {
+                key: "nbrWorkPeriodic",
+                title: t("dashboard.cards.nbrWorkPeriodic"),
+                value: numberFormatter.format(dashboard.nbrWorkPeriodic || 0),
+                tone: "info",
+                icon: <FaTasks />,
+                link: "/work_periodic",
+            },
+            {
+                key: "nbrMission",
+                title: t("dashboard.cards.nbrMission"),
+                value: numberFormatter.format(dashboard.nbrMission || 0),
+                tone: "info",
+                icon: <FaTasks />,
+                link: "/work_periodic_mission",
+            },
+        ],
+        [dashboard, numberFormatter, t]
+    );
 
     return (
-        <div className="container mt-3">
-            {/* 🔹 Filters */}
-            <div className="d-flex align-items-center mb-3">
-                <label htmlFor="periodeFilter" className="me-2 fw-bold">Filter by Periode:</label>
-                <Dropdown
-                    id="periodeFilter"
-                    value={periodeFilter}
-                    options={[
-                        { label: "All", value: null },
-                        ...periodes.map(p => ({ label: p.year, value: p.id })),
-                    ]}
-                    onChange={(e) => setPeriodeFilter(e.value)}
-                    placeholder="Select Periode"
-                    style={{ width: '280px' }}
-                />
+        <div className="dashboard-wrapper">
+            <div className="dashboard-hero">
+                <div>
+                    <h1 className="dashboard-title">{t("common.brand")}</h1>
+                    <p className="dashboard-subtitle">{t("dashboard.title")}</p>
+                </div>
             </div>
 
-            <div className="d-flex align-items-center mb-4">
-                <label htmlFor="enterpriseFilter" className="me-2 fw-bold">Filter by Enterprise:</label>
-                <Dropdown
-                    id="enterpriseFilter"
-                    value={enterpriseFilter}
-                    options={[
-                        { label: "All", value: null },
-                        ...enterprise.map(ent => ({ label: ent.name, value: ent.id })),
-                    ]}
-                    onChange={(e) => setEnterpriseFilter(e.value)}
-                    placeholder="Select Enterprise"
-                    style={{ width: '280px' }}
-                />
+            <div className="dashboard-filters">
+                <div className="filter-group">
+                    <label htmlFor="periodeFilter" className="filter-label">
+                        {t("dashboard.filters.period")}
+                    </label>
+                    <Dropdown
+                        id="periodeFilter"
+                        value={periodeFilter}
+                        options={[
+                            { label: t("dashboard.filters.all"), value: null },
+                            ...periodes.map((p) => ({ label: p.year, value: p.id })),
+                        ]}
+                        onChange={(e) => setPeriodeFilter(e.value)}
+                        placeholder={t("dashboard.filters.period")}
+                        className="dashboard-dropdown"
+                    />
+                </div>
+
+                <div className="filter-group">
+                    <label htmlFor="enterpriseFilter" className="filter-label">
+                        {t("dashboard.filters.enterprise")}
+                    </label>
+                    <Dropdown
+                        id="enterpriseFilter"
+                        value={enterpriseFilter}
+                        options={[
+                            { label: t("dashboard.filters.all"), value: null },
+                            ...enterprise.map((ent) => ({ label: ent.name, value: ent.id })),
+                        ]}
+                        onChange={(e) => setEnterpriseFilter(e.value)}
+                        placeholder={t("dashboard.filters.enterprise")}
+                        className="dashboard-dropdown"
+                    />
+                </div>
             </div>
 
-            {/* 🔹 Dashboard Cards */}
-            <div className="row">
-                {stats.map((stat, i) => (
-                    <div key={i} className="col-md-3 col-sm-6 p-2">
-                        <Link to="/facture" style={{ textDecoration: "none" }}>
-                            <Card
-                                className="shadow-3 border-round-xl"
-                                style={{
-                                    border: "none",
-                                    textAlign: "center",
-                                    backgroundColor:
-                                        stat.color === "#3f8600"
-                                            ? "rgba(63, 134, 0, 0.1)"
-                                            : "rgba(207, 19, 34, 0.1)",
-                                }}
-                            >
-                                <div
-                                    style={{
-                                        fontSize: "1rem",
-                                        color: "#444",
-                                        fontWeight: "500",
-                                        marginBottom: "8px",
-                                    }}
-                                >
-                                    {stat.title}
-                                </div>
-
-                                <div>
-                  <span
-                      style={{
-                          color: stat.color,
-                          fontSize: "1.8rem",
-                          fontWeight: "700",
-                      }}
-                  >
-                    {stat.icon} {stat.value}
-                  </span>
-                                </div>
-                            </Card>
-                        </Link>
-                    </div>
+            <div className="dashboard-grid">
+                {cards.map((card) => (
+                    <Link to={card.link} className={`dashboard-card ${card.tone}`} key={card.key}>
+                        <div className="card-icon">{card.icon}</div>
+                        <div className="card-content">
+                            <span className="card-title">{card.title}</span>
+                            <span className="card-value">{card.value}</span>
+                        </div>
+                    </Link>
                 ))}
             </div>
         </div>

@@ -157,7 +157,30 @@ code {
     width: 100%;
     min-height: calc(100vh - 70px); /* adjust if navbar height differs */
     padding-top: 20px; /* optional spacing inside */
-    background-color: #f8f9fa; /* light gray background */
+    background-color: transparent;
+}
+
+.main-layout {
+    min-height: 100vh;
+    background: #0f172a;
+}
+
+.sidebar-sider {
+    background: transparent !important;
+}
+
+.content-layout {
+    background: linear-gradient(180deg, #f5f7fb 0%, #eef2ff 35%, #f9fafc 100%);
+    min-height: 100vh;
+}
+
+.content-area {
+    padding: 1.5rem;
+}
+
+.app-footer {
+    background: transparent;
+    border-top: 1px solid rgba(15, 23, 42, 0.08);
 }
 
 
@@ -165,4 +188,5 @@ code {
 @import "assets/css/navbar.css";
 @import "assets/css/workPeriodic.css";
 @import "assets/css/factureDialog.css";
+@import "assets/css/dashboard.css";
 

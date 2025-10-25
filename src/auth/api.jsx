@@ -1,20 +1,10 @@
-// src/utils/api.ts
-
-/**
- * Wrapper around fetch with automatic JWT token
- */
-
-
-/**
- * Wrapper around fetch with automatic JWT token
- */
-export async function apiFetch(endpoint: string, options: RequestInit = {}) {
+export async function apiFetch(endpoint, options = {}) {
     const token = sessionStorage.getItem("token");
 
     // ✅ Detect if the request body is FormData
     const isFormData = options.body instanceof FormData;
 
-    const headers: HeadersInit = {
+    const headers = {
         ...options.headers,
     };
 

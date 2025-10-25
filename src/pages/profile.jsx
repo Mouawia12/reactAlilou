@@ -3,7 +3,7 @@ import { Form, Button, Card, Container, Row, Col, Image } from "react-bootstrap"
 import { MyAlert } from "../helper/Tools";
 import avatarPlaceholder from "../assets/img/avatar.png";
 
-const Profile: React.FC = () => {
+const Profile = () => {
     const [formData, setFormData] = useState({
         id: "",
         name: "",
@@ -35,17 +35,17 @@ const Profile: React.FC = () => {
         }
     }, []);
 
-    const handleInfoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setFormData({ ...formData, [e.target.name]: e.target.value });
+    const handleInfoChange = (event) => {
+        setFormData({ ...formData, [event.target.name]: event.target.value });
     };
 
-    const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setPasswordData({ ...passwordData, [e.target.name]: e.target.value });
+    const handlePasswordChange = (event) => {
+        setPasswordData({ ...passwordData, [event.target.name]: event.target.value });
     };
 
     // ✅ Save personal info
-    const handleSaveInfo = async (e: React.FormEvent) => {
-        e.preventDefault();
+    const handleSaveInfo = async (event) => {
+        event.preventDefault();
         try {
 
             MyAlert("Personal info updated successfully!", "success", "Success");
@@ -55,8 +55,8 @@ const Profile: React.FC = () => {
     };
 
     // ✅ Save password
-    const handleSavePassword = async (e: React.FormEvent) => {
-        e.preventDefault();
+    const handleSavePassword = async (event) => {
+        event.preventDefault();
 
         if (passwordData.newPassword !== passwordData.confirmPassword) {
             MyAlert("Passwords do not match!", "error", "Error");

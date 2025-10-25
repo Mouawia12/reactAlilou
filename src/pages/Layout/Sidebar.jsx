@@ -1,8 +1,6 @@
 import React from "react";
-
 import {
     AiOutlineHome,
-
     AiOutlineFile,
     AiOutlineTeam,
     AiOutlineUser,
@@ -12,78 +10,72 @@ import {
     AiFillProduct,
     AiOutlineSetting,
     AiOutlineKey,
-
 } from "react-icons/ai";
 import { Menu, Button } from "antd";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import avatar from "../../assets/img/logo.PNG";
 import { confirmLogout } from "../../helper/Tools";
+import { useLanguage } from "../../context/LanguageContext";
 
 const { SubMenu } = Menu;
 
-const Myside: React.FC = () => {
+const Myside = () => {
     const navigate = useNavigate();
     const location = useLocation();
+    const { t } = useLanguage();
+    const user = JSON.parse(sessionStorage.getItem("user") || "{}");
 
     return (
-        <div
-            style={{
-                display: "flex",
-                flexDirection: "column",
-                height: "100vh",
-            }}
-        >
-            {/* Top profile */}
+        <div className="sidebar-wrapper">
             <div className="sidebar-profile">
-                <Link to="/profile"> <img src={avatar} alt="Profile" /></Link>
-                <h4>Ali</h4>
+                <Link to="/profile">
+                    <img src={avatar} alt="Profile" />
+                </Link>
+                <h4>{user?.name || ""}</h4>
             </div>
 
-            {/* Menu */}
-            <div style={{ flex: 1, overflowY: "auto" }}>
+            <div className="sidebar-menu">
                 <Menu
                     theme="dark"
                     mode="inline"
                     selectedKeys={[location.pathname.replace("/", "") || "home"]}
                 >
                     <Menu.Item key="home" icon={<AiOutlineHome />}>
-                        <Link to="/home">Home</Link>
+                        <Link to="/home">{t("sidebar.home")}</Link>
                     </Menu.Item>
                     <Menu.Item key="clients" icon={<AiOutlineTeam />}>
-                        <Link to="/clients">Clients</Link>
+                        <Link to="/clients">{t("sidebar.clients")}</Link>
                     </Menu.Item>
                     <Menu.Item key="work_periodic" icon={<AiOutlineFieldTime />}>
-                        <Link to="/work_periodic">Work Periodic</Link>
+                        <Link to="/work_periodic">{t("sidebar.workPeriodic")}</Link>
                     </Menu.Item>
                     <Menu.Item key="work_periodic_mission" icon={<AiFillProduct />}>
-                        <Link to="/work_periodic_mission">Missions</Link>
+                        <Link to="/work_periodic_mission">{t("sidebar.missions")}</Link>
                     </Menu.Item>
 
-                    <SubMenu key="Services" icon={<AiOutlineUnorderedList />} title="Services">
-                        <Menu.Item key="orders" icon={<AiOutlineUnorderedList  />}>
-                            <Link to="/orders">Bon Commande</Link>
+                    <SubMenu key="services" icon={<AiOutlineUnorderedList />} title={t("sidebar.services")}>
+                        <Menu.Item key="orders" icon={<AiOutlineUnorderedList />}>
+                            <Link to="/orders">{t("sidebar.orders")}</Link>
                         </Menu.Item>
                         <Menu.Item key="factures" icon={<AiOutlineFile />}>
-                            <Link to="/factures">Facture</Link>
+                            <Link to="/factures">{t("sidebar.factures")}</Link>
                         </Menu.Item>
                     </SubMenu>
 
-                    <SubMenu key="users" icon={<AiOutlineSetting />} title="Gestion Setting">
-                        <Menu.Item key="setting " icon={<AiOutlineSetting />}>
-                            <Link to="/setting">General Settings</Link>
+                    <SubMenu key="settings" icon={<AiOutlineSetting />} title={t("sidebar.settings")}>
+                        <Menu.Item key="setting" icon={<AiOutlineSetting />}>
+                            <Link to="/setting">{t("sidebar.general")}</Link>
                         </Menu.Item>
                         <Menu.Item key="users-settings" icon={<AiOutlineUser />}>
-                            <Link to="/users" >Users Settings</Link>
+                            <Link to="/users">{t("sidebar.users")}</Link>
                         </Menu.Item>
-                        <Menu.Item key="roles " icon={<AiOutlineKey />}>
-                            <Link to="/roles">Roles Settings</Link>
+                        <Menu.Item key="roles" icon={<AiOutlineKey />}>
+                            <Link to="/roles">{t("sidebar.roles")}</Link>
                         </Menu.Item>
                     </SubMenu>
-
                 </Menu>
             </div>
 
-            {/* Footer Logout Button */}
             <div className="sidebar-logout">
                 <Button
                     type="primary"
@@ -92,6 +84,7 @@ const Myside: React.FC = () => {
                     size="large"
                     danger
                     onClick={() => confirmLogout(navigate)}
+                    aria-label={t("sidebar.quickLogout")}
                 />
             </div>
         </div>
