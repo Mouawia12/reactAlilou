@@ -1,0 +1,51 @@
+/* === Number & Decimal Input Styling === */
+input[type="number"].custom-input {
+    text-align: right;           /* Align digits right */
+    font-family: "Roboto Mono", monospace; /* Cleaner numeric font */
+    font-size: 1.05rem;
+    padding-right: 10px;
+}
+
+/* Highlight formatted numbers */
+.text-success {
+    font-weight: 600;
+    text-align: right;
+    font-family: "Roboto Mono", monospace;
+}
+
+/* Add focus effect for numeric inputs */
+input[type="number"].custom-input:focus {
+    border-color: #198754; /* Bootstrap success green */
+    box-shadow: 0 0 0 0.2rem rgba(25, 135, 84, 0.25);
+}
+
+/* === Table Styling === */
+.table-custom td,
+.table-custom th {
+    vertical-align: middle;
+    text-align: center;
+}
+
+.table-custom input {
+    width: 100%;
+    text-align: right;
+}
+
+/* === Total Fields === */
+.form-control-lg.text-end.fw-bold {
+    font-size: 1.1rem;
+    color: #0d6efd; /* Bootstrap primary */
+    font-weight: 700;
+    background-color: #f8f9fa;
+    border: 2px solid #dee2e6;
+}
+
+/* Add nice look to the TTC summary */
+td.fw-bold.text-success {
+    font-size: 1.1rem;
+    text-align: right;
+    background-color: #f6fff6;
+    padding: 8px 12px;
+    border-radius: 5px;
+    font-family: "Roboto Mono", monospace;
+}

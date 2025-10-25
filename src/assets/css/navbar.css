@@ -1,0 +1,50 @@
+/* Navbar custom styles */
+.custom-navbar {
+    background-color: #212529 !important; /* dark background */
+    border-bottom: 2px solid #111;
+    z-index: 1030; /* keep navbar above other elements */
+}
+
+.navbar-title {
+    font-family: 'Georgia', 'Times New Roman', serif;
+    font-weight: bold;
+    font-style: italic;
+    margin: 0;
+    color: #f8f9fa; /* light text */
+    text-shadow: 1px 1px 2px #000;
+}
+
+.avatar-img {
+    object-fit: cover;
+    border: 2px solid #444;
+    transition: 0.3s ease;
+}
+
+.avatar-img:hover {
+    border-color: #0d6efd; /* bootstrap blue */
+}
+
+/* Dropdown dark */
+.dropdown-menu-dark {
+    background-color: #2a2f35;
+    border: 1px solid #333;
+}
+
+.dropdown-item {
+    color: #ddd;
+}
+
+.dropdown-item:hover {
+    background-color: #3a3f45;
+    color: #fff;
+}
+
+.dropdown-item.text-danger:hover {
+    background-color: #5c1a1a;
+    color: #ffcccc;
+}
+
+/* Prevent content from being hidden under fixed navbar */
+body {
+    padding-top: 69px; /* adjust if navbar is taller */
+}

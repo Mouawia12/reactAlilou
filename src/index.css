@@ -1,0 +1,168 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,700;1,400&display=swap');
+
+body {
+  margin: 0;
+  font-family: 'Georgia', 'Times New Roman', serif,-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+
+}
+body, .ant-menu, .ant-menu-item, .ant-layout, .ant-layout-header, .navbar {
+    font-family: 'Georgia', 'Times New Roman', serif !important;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+.breadcrumb {
+    display: flex;
+    list-style: none;
+    padding: 8px 12px;
+    margin-left: 12px;
+    background: transparent;  /* remove grey box */
+}
+
+.breadcrumb-item {
+    font-size: 15px;
+    color: #6c757d;           /* subtle gray for inactive */
+}
+
+.breadcrumb-item + .breadcrumb-item::before {
+    content: "›";             /* separator arrow */
+    padding: 0 8px;
+    color: #adb5bd;           /* lighter gray separator */
+}
+
+.breadcrumb-item a {
+    color: #0d6efd;           /* Bootstrap blue */
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s ease-in-out;
+}
+
+.breadcrumb-item a:hover {
+    color: #0a58ca;           /* darker blue on hover */
+    text-decoration: underline;
+}
+
+.breadcrumb-item.active {
+    color: #212529;           /* black for current page */
+    font-weight: bold;
+}
+
+
+/* MyTable.css */
+
+.mytable-container {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    margin: 20px 0;
+}
+
+.mytable-container .card {
+    padding: 0;
+}
+
+.mytable-container .p-datatable {
+    font-size: 14px;
+}
+
+.mytable-container .p-datatable-header {
+    background-color: #f4f6f9;
+    color: #495057;
+    font-weight: 600;
+    border-bottom: 1px solid #dee2e6;
+}
+
+.mytable-container .p-datatable-thead > tr > th {
+    background-color: #f8f9fa;
+    color: #495057;
+    padding: 12px 10px;
+    text-align: left;
+    border-bottom: 2px solid #dee2e6;
+    font-weight: 600;
+}
+
+.mytable-container .p-datatable-tbody > tr > td {
+    padding: 10px;
+    color: #212529;
+    border-bottom: 1px solid #dee2e6;
+    transition: background-color 0.2s;
+}
+
+.mytable-container .p-datatable-tbody > tr:hover {
+    background-color: #f1f5f9;
+    cursor: pointer;
+}
+
+.mytable-container .p-paginator {
+    background-color: #f8f9fa;
+    padding: 10px 0;
+    border-top: 1px solid #dee2e6;
+    color: #495057;
+}
+
+.mytable-container .p-paginator .p-paginator-current {
+    color: #6c757d;
+}
+
+.mytable-container .p-column-filter {
+    width: 100%;
+    padding: 6px 8px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    font-size: 13px;
+    transition: border-color 0.3s;
+}
+
+.mytable-container .p-column-filter:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+}
+
+/* Responsive: Adjust padding on smaller screens */
+@media (max-width: 768px) {
+    .mytable-container .p-datatable-tbody > tr > td {
+        padding: 8px 5px;
+        font-size: 13px;
+    }
+
+    .mytable-container .p-datatable-header,
+    .mytable-container .p-datatable-thead > tr > th {
+        padding: 10px 5px;
+        font-size: 14px;
+    }
+}
+
+
+
+/* Force Content to take full width */
+.app-content {
+    width: 100% !important;
+    padding: 0; /* remove default padding */
+    margin: 0;
+}
+
+/* Make main also full width & height */
+.app-main {
+    width: 100%;
+    min-height: calc(100vh - 70px); /* adjust if navbar height differs */
+    padding-top: 20px; /* optional spacing inside */
+    background-color: #f8f9fa; /* light gray background */
+}
+
+
+@import "assets/css/sidebar.css";
+@import "assets/css/navbar.css";
+@import "assets/css/workPeriodic.css";
+@import "assets/css/factureDialog.css";
+

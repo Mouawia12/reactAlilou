@@ -1,0 +1,65 @@
+
+.sidebar-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background-color: #001529; /* Antd dark theme background */
+}
+
+.sidebar-profile {
+  padding: 24px 16px;
+  text-align: center;
+  border-bottom: 1px solid #ffffff1a;
+}
+
+.sidebar-profile img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  margin-bottom: 12px;
+  border: 2px solid #ffffff4d;
+}
+
+.sidebar-profile h4 {
+  color: #ffffffd9;
+  margin: 0;
+  font-weight: 600;
+}
+
+.sidebar-menu {
+  flex: 1;
+  overflow-y: auto;
+}
+
+/* Custom scrollbar for webkit browsers */
+.sidebar-menu::-webkit-scrollbar {
+  width: 6px;
+}
+
+.sidebar-menu::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.sidebar-menu::-webkit-scrollbar-thumb {
+  background: #ffffff4d;
+  border-radius: 3px;
+}
+
+.sidebar-logout {
+  padding: 16px;
+  text-align: center;
+  border-top: 1px solid #ffffff1a;
+}
+
+
+.my-table {
+    table-layout: fixed;   /* fixes column widths */
+    width: 100%;           /* stretch table */
+}
+.my-table th,
+.my-table td {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+

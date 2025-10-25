@@ -1,0 +1,70 @@
+/* Make breadcrumb smaller */
+.breadcrumb-sm {
+    font-size: 0.8rem;       /* smaller text */
+    padding: 0.25rem 0.5rem  ;
+
+}
+
+.breadcrumb-sm .p-breadcrumb .p-menuitem-link {
+    padding: 0.2rem 0.5rem !important;
+}
+/* Apply to all breadcrumb links */
+.breadcrumb-sm .p-breadcrumb a {
+    text-decoration: none !important; /* remove underline */
+}
+.p-breadcrumb a {
+    text-decoration: none !important;
+}
+.breadcrumb-sm .p-breadcrumb {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+.p-breadcrumb {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+
+
+
+
+.custom-input {
+    border-radius: 8px !important;
+    padding: 10px 14px !important;
+    font-size: 1.05rem !important;
+}
+
+.table-custom {
+    background-color: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.table-custom thead {
+    background: #2c3e50;
+    color: white;
+    text-align: center;
+}
+
+.table-custom tbody tr:hover {
+    background-color: #f8f9fa;
+    transition: 0.3s;
+}
+
+
+.custom-check .form-check-label {
+    font-size: 1.2rem;
+    font-weight: 500;
+    margin-left: 10px; /* increase spacing between checkbox and label */
+    margin-top: 5px;
+    cursor: pointer;
+}
+
+.custom-check .form-check-input {
+    width: 2rem;
+    height: 2rem;
+    cursor: pointer;
+    margin-right: 8px; /* add extra spacing */
+}
+

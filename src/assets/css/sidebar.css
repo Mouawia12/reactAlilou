@@ -1,0 +1,89 @@
+/* Sidebar background */
+.ant-layout-sider,
+.ant-menu-dark {
+    background-color: #212529 !important; /* same as navbar */
+}
+
+/* Menu items default state */
+.ant-menu-dark .ant-menu-item,
+.ant-menu-dark .ant-menu-submenu-title {
+    color: #ccc !important;
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+/* Active (selected) menu item */
+.ant-menu-dark .ant-menu-item-selected {
+    background-color: rgba(13, 110, 253, 0.2) !important; /* ✅ light bootstrap blue overlay */
+    color: #fff !important;
+    font-weight: bold;
+    border-radius: 6px;
+    margin: 4px 8px; /* spacing around selected item */
+}
+
+/* Active item icon */
+.ant-menu-dark .ant-menu-item-selected .anticon {
+    color: #0d6efd !important; /* keep icon vivid blue */
+}
+
+/* Hover effect */
+.ant-menu-dark .ant-menu-item:hover,
+.ant-menu-dark .ant-menu-submenu-title:hover {
+    background-color: #343a40 !important; /* dark gray hover */
+    color: #fff !important;
+    border-radius: 6px;
+}
+
+/* Links inside menu */
+.ant-menu a {
+    text-decoration: none !important;
+    color: inherit !important;
+}
+
+/* Submenu styling */
+.ant-menu-submenu-title {
+    font-weight: 500;
+}
+
+/* Profile section */
+.sidebar-profile {
+    text-align: center;
+    padding: 20px 0;
+    border-bottom: 1px solid #333;
+}
+
+.sidebar-profile img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #0d6efd;
+    transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.sidebar-profile img:hover {
+    transform: scale(1.05);
+    border-color: #66b2ff;
+}
+
+.sidebar-profile h4 {
+    color: #f8f9fa;
+    margin-top: 10px;
+    font-weight: 600;
+}
+
+/* Footer logout button */
+.sidebar-logout {
+    text-align: center;
+    padding: 20px 0;
+    border-top: 1px solid #333;
+}
+
+.sidebar-logout .ant-btn-dangerous {
+    background: #dc3545;
+    border: none;
+    transition: background 0.3s ease;
+}
+
+.sidebar-logout .ant-btn-dangerous:hover {
+    background: #a71d2a;
+}
